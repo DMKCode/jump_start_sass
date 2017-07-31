@@ -198,4 +198,27 @@ $length: length($value); // 1
 $type: type-of($value); // list
 ```
 
+## Maps
+```
+$message-themes: (
+  'info': deepskyblue,
+  'danger': tomato,
+  'warning': gold,
+  'confirm': lightgreen,
+);
+```
+```
+.message-info { color: map-get($message-themes, 'info'); }
+.message-danger { color: map-get($message-themes, 'danger'); }
+.message-warning { color: map-get($message-themes, 'warning'); }
+.message-confirm { color: map-get($message-themes, 'confirm'); }
+```
+```
+$color-names: (
+  #ff0000: 'blood',
+  #00ff00: 'grass',
+  #0000ff: 'ocean',
+);
+```
+
 

@@ -73,3 +73,33 @@ $initial-value: 42;
 $value-in-px: ($initial-value * 1px); // 42px
 $unitless-value: ($value-in-px / 1px); // 42
 ```
+
+## Colors
+```
+$brand-color: #BADA55;
+.logo {
+  color: $brand-color;
+}
+```
+```
+.message {
+  padding: 10px;
+  border: 1px solid currentcolor;
+}
+.message-info {
+$color: blue;
+  color: $color;
+  background-color: lighten($color, 20%);
+}
+.message-danger {
+  $color: red;
+  color: $color;
+  background-color: lighten($color, 20%);
+}
+.message-confirm {
+$color: green;
+  color: $color;
+  background-color: lighten($color, 20%);
+}
+```
+

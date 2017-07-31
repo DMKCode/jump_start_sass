@@ -102,4 +102,70 @@ $color: green;
   background-color: lighten($color, 20%);
 }
 ```
+## Booleans
+```
+$support-legacy-browsers: true;
+@if $support-legacy-browsers {
+  .clearfix {
+    *zoom: 1;
+  }
+}
+```
+```
+.clearfix:after {
+  content: '';
+  display: table;
+  clear: both;
+} 
+``` 
+
+### The not keyword
+```
+$bool: false;
+// "if not false"
+// which can be rewritten as: "if true"
+@if not $bool {
+  // We get in there
+}
+```
+
+## Null
+```
+$type: type-of(null); // null
+$type: type-of(NULL); // string
+$type: type-of('null'); // string
+$type: type-of('n' + 'u' + 'LL'); // string
+```
+```
+$value: null;
+.foo {
+  // This declaration will not be output since
+  24 Jump Start Sass
+  // the variable is evaluated as `null`
+  color: $value;
+}
+```
+
+```
+@mixin absolute($top: null, $right: null, $bottom: null, $left: null) {
+  position: absolute;
+  top: $top;
+  right: $right;
+  bottom: $bottom;
+  left: $left;
+}
+```
+```
+.foo {
+  @include absolute($top: 13px, $left: 37px);
+}
+```
+```
+.foo {
+  position: absolute;
+  top: 13px;
+  left: 37px;
+}
+```
+
 

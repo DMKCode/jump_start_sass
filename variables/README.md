@@ -7,3 +7,20 @@
 - bool (true or false)
 - null (null)
 
+## Strings
+`$my-variable: 'Hello world!';`
+`
+$font-name: 'Helvetica';
+$font-type: sans-serif;
+.foo {
+  font-family: $helvetica, $font-type;
+}
+`
+
+`
+$base-path: '/images/';
+$file-name: 'kittens';
+$extension: 'png';
+$file-path: $base-path + $file-name + '.' + $extension;
+// -> '/images/kittens.png'
+`

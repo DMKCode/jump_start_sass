@@ -168,4 +168,34 @@ $value: null;
 }
 ```
 
+## Lists
+```
+$list: (42, hotpink, 'kittens');
+```
+```
+$empty-list: ();
+```
+```
+$value: Hello world;
+$type: type-of($value); // list
+$length: length($value); // 2
+$separator: list-separator($value); // space
+```
+```
+$value: ('Hello', 'world');
+$type: type-of($value); // list
+$length: length($value); // 2
+$separator: list-separator($value); // comma
+```
+```
+$value: 'foo';
+$length: length($value); // 1
+$type: type-of($value); // string
+```
+```
+$value: ('foo',);
+$length: length($value); // 1
+$type: type-of($value); // list
+```
+
 

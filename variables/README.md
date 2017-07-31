@@ -24,3 +24,52 @@ $extension: 'png';
 $file-path: $base-path + $file-name + '.' + $extension;
 // -> '/images/kittens.png'
 ```
+
+## Numbers
+```
+$container-max-width: 1180px;
+.container {
+  width: 100%;
+  margin: 0 auto;
+  max-width: $container-max-width;
+}
+```
+
+```
+$element-width: 400px;
+/**
+* 1. Size the element
+* 2. Horizontally center the element in its container
+* @TODO: move to CSS transforms once we drop support for IE 8
+*/
+.foo {
+  width: $element-width; /* 1 */
+  position: absolute; /* 2 */
+  left: 50%; /* 2 */
+  margin-left: ($element-width / -2); /* 2 */
+}
+```
+```
+.foo {
+  $gap: 20px;
+  // No variable nor parentheses: no division performed
+  font: 16px / 2 sans-serif;
+  // Wrapping parentheses: division returning 8px
+  padding: (16px / 2);
+  // Member as variable: division returning 10px
+  margin: $gap / 2;
+  // Arithmetic expression: calculation returning 308px
+  width: 300px + 16px / 2;
+}
+```
+### Units
+```
+$value: 42;
+$good: $value * 1px;
+$bad: $value + px;
+```
+```
+$initial-value: 42;
+$value-in-px: ($initial-value * 1px); // 42px
+$unitless-value: ($value-in-px / 1px); // 42
+```

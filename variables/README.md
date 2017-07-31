@@ -220,5 +220,185 @@ $color-names: (
   #0000ff: 'ocean',
 );
 ```
+## Scope
+```
+$padding: 10px;
+.module {
+  $padding: 20px;
+  padding: $padding; // 20px 
+}
+.foo {
+  padding: $padding; // 10px
+}
+```
+```
+.module {
+  padding: 20px;
+}
+.foo {
+  padding: 10px;
+}
+```
+
+## The !global Flag
+```
+$padding: 10px;
+.module {
+  $padding: 20px !global;
+  padding: $padding;
+}
+.foo {
+  padding: $padding;
+}
+```
+```
+.module {
+  padding: 20px;
+}
+.foo {
+  padding: 20px;
+}
+```
+
+## The !default Flag
+```
+$padding: 10px;
+$padding: 20px !default;
+.foo {
+  padding: $padding; // 10px
+}
+// Your configuration of the third party library
+$third-party-output-prefix: false;
+// The third party library has some default values such as
+// $third-party-output-prefix: true !default;
+// In this case, the value is `false` thanks to `!default`.
+@import 'third-party-library';
+```
+```
+// User theme stylesheet containing:
+// $brand-color: hotpink;
+@import 'user-theme';
+// Default configuration
+$brand-color: grey !default;
+.foo {
+  color: $brand-color; // hotpink
+}
+```
+```
+$padding: null;
+$padding: 20px !default;
+.foo {
+  padding: $padding; // 20px
+}
+```
+
+## Interpolation
+```
+$name: 'Hugo';
+.foo {
+  content: 'Hello ' + $name + '!'; // Hello Hugo!
+}
+```
+```
+$name: 'Hugo';
+.foo {
+  content: 'Hello #{$name}!';
+}
+```
+```
+.main {
+$sidebar-width: 300px;
+  width: calc(100% - $sidebar-width); // calc(100% - $sidebar-width)
+}
+```
+
+```
+.main {
+$sidebar-width: 300px;
+  width: calc(100% - #{$sidebar-width}); // calc(100% - 300px)
+}
+```
+```
+$media: screen;
+$feature: min-width;
+$value: 1337px;
+@media ($media) and ($feature: $value) {
+  // …
+}
+```
+```
+@media (screen) and (min-width: 1337px) {}
+```
+```
+$media: screen;
+$feature: min-width;
+$value: 1337px;
+@media #{$media} and ($feature: $value) {
+  // …
+}
+```
+```
+$section: 'home';
+.section-#{$section} {
+  background: transparent;
+}
+```
+
+## Creating meaningful variable names
+```
+// Yep
+$brand-color: #BADA55;
+// Nope
+$brand_color: #BADA55;
+// Definitely nope
+$brandColor: #BADA55;
+// Stop it
+$BrandColor: #BADA55;
+// Why are you doing this?
+$BrAnDcOlOr: #BADA55;
+```
+```
+// This variable contains the list of valid CSS positions.
+// It actually is a constant, hence the different naming syntax.
+$CSS_POSITIONS: (top, right, bottom, left, center);
+```
+```
+// Yep
+$global-spacing: 10px;
+// Nope
+$spacing-10: 10px;
+```
+```
+$gold: hsl(42, 78%, 54%);
+$dark-blue: rgb(13, 33, 70);
+$primary-theme-color: $gold;
+$secondary-theme-color: $dark-blue;
+```
+
+## CSS Custom Properties or Sass Variables
+```
+/**
+* Declaring a CSS custom property named `main-color` at root level
+* so that it is accessible anywhere in the document
+*/
+:root {
+  --main-color: #BADA55;
+}
+/**
+* Using the `main-color` variable through the `var(..)` function
+*/
+body {
+  background-color: var(--main-color);
+}
+```
+```
+// Styles from the :root element
+var styles = window.getComputedStyle(document.documentElement);
+// Get current color set in `--main-color` variable
+var color = styles.getPropertyValue('--main-color');
+// Replace the color with a new value; now all elements using
+// `--main-color` will be updated with the new color value. Handy!
+document.documentElement.styles.setProperty('--main-color', 'hotpink');
+```
 
 
